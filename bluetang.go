@@ -1,7 +1,6 @@
 package bluetang
 
 import (
-  "fmt"
   "regexp"
   "strings"
 )
@@ -32,11 +31,16 @@ func Mobile(s string) (string, string) {
   // remove all non-numeric character sequence
   reg := regexp.MustCompile("[^0-9]+")
   s = reg.ReplaceAllString(s, "")
-  fmt.Println(s)
   // test valid mobile number
   reg = regexp.MustCompile("^[0-9]{10,11}$")
   if !reg.MatchString(s) {
     msg = "Número de celular inválido"
+  } else {
+    if len(s) == 10 {
+      s = "(" + s[:2] + ") " + s[2:6] + "-" + s[6:]
+    } else {
+      s = "(" + s[:2] + ") " + s[2:3] + " " + s[3:7] + "-" + s[7:]
+    }
   }
   // clean string
   return s, msg
