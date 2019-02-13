@@ -15,14 +15,35 @@ func Name(s string) (string, string) {
   return s, msg
 }
 
+func Password(s string) (string, string) {
+  var msg string
+  if len(s) < 8 {
+    msg = "Senha deve conter pelo menos oito caracteres"
+    return s, msg
+  }
+  // must have at least one number
+  reg := regexp.MustCompile("[0-9]+")
+  if !reg.MatchString(s) {
+    msg = "Senha deve conter pelo menos um número"
+    return s, msg
+  }
+  // must have at least one upper alpha
+  reg = regexp.MustCompile("[A-Z]+")
+  if !reg.MatchString(s) {
+    msg = "Senha deve conter pelo menos uma letra maiúscula"
+    return s, msg
+  }
+  return s, msg
+}
+
 func Email(s string) (string, string) {
   var msg string
+  // clean string
+  s = strings.TrimSpace(strings.ToLower(s))
   reg := regexp.MustCompile("^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?(?:\\.[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?)*$")
   if !reg.MatchString(s) {
     msg = "E-mail inválido"
   }
-  // clean string
-  s = strings.TrimSpace(strings.ToLower(s))
   return s, msg
 }
 
