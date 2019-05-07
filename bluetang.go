@@ -8,7 +8,7 @@ import (
 func Name(s string) (string, string) {
   var msg string
   if len(strings.TrimSpace(s)) < 4 {
-    msg = "Nome deve conter pelo menos quatro letras"
+    msg = "Nome deve conter pelo menos quatro caracteres"
   }
   // clean string
   s = strings.Join(strings.Fields(strings.Title(strings.ToLower(s))), " ")
