@@ -2,6 +2,7 @@ package bluetang
 
 import (
 	"regexp"
+	"strconv"
 	"strings"
 )
 
@@ -65,4 +66,24 @@ func Mobile(s string) (string, string) {
 	}
 	// clean string
 	return s, msg
+}
+
+func Uint64Number(s string) (uint64, string) {
+	var msg string
+	// clean string
+	u, err := strconv.ParseUint(s, 10, 64)
+	if err != nil {
+		return 0, "Número inválido"
+	}
+	return u, msg
+}
+
+func Uint32Number(s string) (uint32, string) {
+	var msg string
+	// clean string
+	u, err := strconv.ParseUint(s, 10, 32)
+	if err != nil {
+		return 0, "Número inválido"
+	}
+	return uint32(u), msg
 }
